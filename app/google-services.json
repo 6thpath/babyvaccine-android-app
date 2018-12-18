@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "544599120130",
+    "firebase_url": "https://baby-vaccin-49bd5.firebaseio.com",
+    "project_id": "baby-vaccin-49bd5",
+    "storage_bucket": "baby-vaccin-49bd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544599120130:android:a527611561938f40",
+        "android_client_info": {
+          "package_name": "com.t6.babyvaccin.babyvaccin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544599120130-m4gs7tj4tg59m3eebskf8ch43703ub32.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.t6.babyvaccin.babyvaccin",
+            "certificate_hash": "0e4f1b456b7edc795141fa8896434dfef0854ae6"
+          }
+        },
+        {
+          "client_id": "544599120130-eu9ese8l7gkusabcfrpm2gre79qp8db3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxeE2Mjkb6OKu745-F4ubsqeMY-nBH-Wg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544599120130-eu9ese8l7gkusabcfrpm2gre79qp8db3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
