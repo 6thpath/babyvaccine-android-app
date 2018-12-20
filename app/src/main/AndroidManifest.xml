@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".Home" />
-        <activity android:name=".AddChild"></activity>
+        <activity android:name=".AddChild" />
+        <activity android:name=".BabyDetail" />
     </application>
 
 </manifest>

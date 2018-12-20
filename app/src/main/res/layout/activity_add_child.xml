@@ -36,6 +36,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="46dp"
         android:text="Birthday:"
+        android:descendantFocusability="blocksDescendants"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ACName" />
 
@@ -58,7 +59,8 @@
         android:layout_marginEnd="15dp"
         android:ems="10"
         android:hint="DD-MM-YYYY"
-        android:inputType="date"
+        android:editable="false"
+        android:inputType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtACName" />
 
