@@ -29,7 +29,7 @@ public class Home extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference myRef;
     ListView listbaby;
-    ArrayList<ChildClass> babies = new ArrayList<ChildClass>();
+    ArrayList<ChildClass> babies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,12 @@ public class Home extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+                babies = new ArrayList<ChildClass>();
                 for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                    String uid = childDataSnapshot.getKey();
+                    String uid = childDataSnapshot.child("uid").getValue().toString();
                     String name = childDataSnapshot.child("name").getValue().toString();
                     String dob = childDataSnapshot.child("dob").getValue().toString();
+//                    Log.d("UID", uid);
                     babies.add(new ChildClass(uid, name, dob));
                 }
                 String[] babynames = new String[babies.size()];
@@ -76,6 +78,7 @@ public class Home extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent mIntent = new Intent(Home.this, BabyDetail.class);
+                        mIntent.putExtra("uid", babies.get(i).getUid());
                         mIntent.putExtra("babyname", babies.get(i).getName());
                         mIntent.putExtra("dob", babies.get(i).getDob());
                         startActivity(mIntent);

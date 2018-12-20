@@ -93,7 +93,7 @@ public class AddChild extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     String newChildKey = myRef.push().getKey();
-                    myRef.child("ChildList").child(name).setValue(new ChildClass(newChildKey, name, dob))
+                    myRef.child("ChildList").child(newChildKey).setValue(new ChildClass(newChildKey, name, dob))
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
