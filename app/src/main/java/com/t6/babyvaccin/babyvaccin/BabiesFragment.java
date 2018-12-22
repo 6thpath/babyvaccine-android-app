@@ -101,7 +101,7 @@ public class BabiesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mAuth.getInstance().signOut();
-
+                getActivity().finish();
             }
         });
 
