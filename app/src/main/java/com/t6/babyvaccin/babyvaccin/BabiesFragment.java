@@ -45,7 +45,7 @@ public class BabiesFragment extends Fragment {
         txthUsr = (TextView) view.findViewById(R.id.homeUsername);
         btnLO = (Button) view.findViewById(R.id.btnLogout);
         btnAC = (Button) view.findViewById(R.id.btnAddChild);
-        listbaby = (ListView) view.findViewById(R.id.listview);
+        listbaby = (ListView) view.findViewById(R.id.listbaby);
         fbloading = (ProgressBar) view.findViewById(R.id.fragBabiesLoading);
         fbloading.setVisibility(View.VISIBLE);
 
