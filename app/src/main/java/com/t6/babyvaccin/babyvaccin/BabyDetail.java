@@ -52,20 +52,20 @@ public class BabyDetail extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(uidBaby != null){
-                    myRef.child(uidBaby).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(BabyDetail.this, "Delete baby successfully", Toast.LENGTH_SHORT).show();
-                                finish();
-                            } else {
-                                Toast.makeText(BabyDetail.this, "Remove failed", Toast.LENGTH_SHORT).show();
-                            }
+            if(uidBaby != null){
+                myRef.child(uidBaby).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(BabyDetail.this, "Delete baby successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(BabyDetail.this, "Remove failed", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
+                });
 
-                }
+            }
             }
         });
     }

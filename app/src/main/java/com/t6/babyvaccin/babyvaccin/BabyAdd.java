@@ -17,12 +17,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.t6.babyvaccin.babyvaccin.model.BabyClass;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class AddChild extends AppCompatActivity {
+public class BabyAdd extends AppCompatActivity {
     EditText txtACN, txtACB;
     Button btnACA, btnACC;
     ProgressBar acloading;
@@ -34,7 +35,7 @@ public class AddChild extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_child);
+        setContentView(R.layout.activity_baby_add);
 
         txtACN = (EditText)findViewById(R.id.txtACName);
         txtACB = (EditText)findViewById(R.id.txtACBirthday);
@@ -79,7 +80,7 @@ public class AddChild extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(AddChild.this, date, myCalendar
+                new DatePickerDialog(BabyAdd.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -94,17 +95,17 @@ public class AddChild extends AppCompatActivity {
                 acloading.setVisibility(View.VISIBLE);
 
                 if(name.matches("^\\s*$") || dob.matches("^\\s*$")) {
-                    Toast.makeText(AddChild.this,
+                    Toast.makeText(BabyAdd.this,
                             "Child's name or birthday is invalid!",
                             Toast.LENGTH_SHORT).show();
                     acloading.setVisibility(View.GONE);
                 } else {
                     String newChildKey = myRef.push().getKey();
-                    myRef.child("ChildList").child(newChildKey).setValue(new ChildClass(newChildKey, name, dob))
+                    myRef.child("ChildList").child(newChildKey).setValue(new BabyClass(newChildKey, name, dob))
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(AddChild.this,
+                                Toast.makeText(BabyAdd.this,
                                         "Add child successfully!",
                                         Toast.LENGTH_SHORT).show();
                                 acloading.setVisibility(View.GONE);
@@ -114,7 +115,7 @@ public class AddChild extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(AddChild.this,
+                                Toast.makeText(BabyAdd.this,
                                         "Add child failed!",
                                         Toast.LENGTH_LONG).show();
                                 acloading.setVisibility(View.GONE);

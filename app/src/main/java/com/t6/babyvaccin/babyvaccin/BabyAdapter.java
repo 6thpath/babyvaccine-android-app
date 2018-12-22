@@ -9,20 +9,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class BabyAdapter extends ArrayAdapter<String> {
+import com.t6.babyvaccin.babyvaccin.model.BabyClass;
 
-    String[] babynames;
+import java.util.ArrayList;
+
+public class BabyAdapter extends ArrayAdapter<BabyClass> {
+
+    ArrayList<BabyClass> babies;
     Context currentCtx;
 
-    public BabyAdapter(Context context, String[] babynames){
+    public BabyAdapter(Context context, ArrayList<BabyClass> babies){
         super(context, R.layout.activity_baby_listview_item);
         this.currentCtx = context;
-        this.babynames = babynames;
+        this.babies = babies;
     }
 
     @Override
     public int getCount() {
-        return babynames.length;
+        return babies.size();
     }
 
     @NonNull
@@ -38,7 +42,7 @@ public class BabyAdapter extends ArrayAdapter<String> {
         } else {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
-        mViewHolder.babyname.setText(babynames[position]);
+        mViewHolder.babyname.setText(babies.get(position).getName());
 
         return convertView;
     }

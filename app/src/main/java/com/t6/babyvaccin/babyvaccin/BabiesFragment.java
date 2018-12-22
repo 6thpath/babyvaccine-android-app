@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.t6.babyvaccin.babyvaccin.model.BabyClass;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class BabiesFragment extends Fragment {
     FirebaseDatabase db;
     DatabaseReference myRef;
     ListView listbaby;
-    ArrayList<ChildClass> babies = new ArrayList<ChildClass>();
+    ArrayList<BabyClass> babies = new ArrayList<BabyClass>();
 
     @Nullable
     @Override
@@ -46,7 +47,7 @@ public class BabiesFragment extends Fragment {
         btnAC = (Button) view.findViewById(R.id.btnAddChild);
         listbaby = (ListView) view.findViewById(R.id.listview);
         fbloading = (ProgressBar) view.findViewById(R.id.fragBabiesLoading);
-        fbloading.setVisibility(View.GONE);
+        fbloading.setVisibility(View.VISIBLE);
 
 //         Get user information
         mAuth = FirebaseAuth.getInstance();
@@ -72,13 +73,9 @@ public class BabiesFragment extends Fragment {
                     String name = childDataSnapshot.child("name").getValue().toString();
                     String dob = childDataSnapshot.child("dob").getValue().toString();
 //                    Log.d("UID", uid);
-                    babies.add(new ChildClass(uid, name, dob));
+                    babies.add(new BabyClass(uid, name, dob));
                 }
-                String[] babynames = new String[babies.size()];
-                for(int i = 0; i < babies.size() ; i++){
-                    babynames[i] = babies.get(i).getName();
-                }
-                BabyAdapter babyAdapter = new BabyAdapter(getContext(), babynames);
+                BabyAdapter babyAdapter = new BabyAdapter(getContext(), babies);
                 listbaby.setAdapter(babyAdapter);
                 listbaby.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -100,7 +97,7 @@ public class BabiesFragment extends Fragment {
             }
         });
 
-        final Intent addchild = new Intent(getContext(), AddChild.class);
+        final Intent addchild = new Intent(getContext(), BabyAdd.class);
 
         // Logout
         btnLO.setOnClickListener(new View.OnClickListener() {

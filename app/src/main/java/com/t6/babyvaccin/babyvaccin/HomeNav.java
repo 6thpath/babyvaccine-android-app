@@ -30,7 +30,7 @@ public class HomeNav extends AppCompatActivity {
                         selectedFragment = new BabiesFragment();
                         break;
                     case R.id.nav_vaccin:
-                        selectedFragment = new VaccinFragment();
+                        selectedFragment = new VaccinesFragment();
                         break;
                 }
 

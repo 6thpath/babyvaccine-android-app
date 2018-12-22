@@ -1,13 +1,13 @@
-package com.t6.babyvaccin.babyvaccin;
+package com.t6.babyvaccin.babyvaccin.model;
 
-public class ChildClass {
+public class BabyClass {
     private String uid;
     private String name;
     private String dob;
 
-    public ChildClass() { }
+    public BabyClass() { }
 
-    public ChildClass(String uid, String name, String dob) {
+    public BabyClass(String uid, String name, String dob) {
         this.uid = uid;
         this.name = name;
         this.dob = dob;
