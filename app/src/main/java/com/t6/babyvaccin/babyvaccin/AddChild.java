@@ -98,7 +98,7 @@ public class AddChild extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(AddChild.this,
-                                        "Add child suuidccessfully!",
+                                        "Add child successfully!",
                                         Toast.LENGTH_SHORT).show();
                                 finish();
                             }

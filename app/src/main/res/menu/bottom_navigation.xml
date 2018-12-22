@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_babies"
+        android:icon="@drawable/ic_child_care_black_24dp"
+        android:title="Babies"
+        />
+
+    <item
+        android:id="@+id/nav_vaccin"
+        android:icon="@drawable/ic_syringe_vaccine_svgrepo_com"
+        android:title="Vaccines"
+        />
+
+
+</menu>
