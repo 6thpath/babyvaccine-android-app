@@ -36,11 +36,12 @@ public class MainActivity extends AppCompatActivity {
         btnTR = (Button)findViewById(R.id.btnToRegister);
 
         final Intent register = new Intent(this, Register.class);
-        final Intent home = new Intent(this, Home.class);
+        final Intent homeNav = new Intent(this, HomeNav.class);
+
 
         if (user != null) {
             Toast.makeText(MainActivity.this, "Authentication successfully!", Toast.LENGTH_SHORT).show();
-            startActivity(home);
+            startActivity(homeNav);
         }
 
         btnL.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SignIn(String email, String password) {
-        final Intent home = new Intent(this, Home.class);
+        final Intent homeNav = new Intent(this, HomeNav.class);
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,
                             "Authentication successfully!",
                             Toast.LENGTH_SHORT).show();
-                    startActivity(home);
+                    startActivity(homeNav);
                 } else {
                     // Log.w("Login", "signInWithEmail:failure", task.getException());
                     Toast.makeText(MainActivity.this,
