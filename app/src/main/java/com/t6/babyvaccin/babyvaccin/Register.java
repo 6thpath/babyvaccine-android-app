@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Register extends AppCompatActivity {
     EditText txtrU, txtrP;
     Button btnR, btnTL;
+    ProgressBar rloading;
     FirebaseAuth mAuth;
 
     @Override
@@ -30,6 +32,8 @@ public class Register extends AppCompatActivity {
         txtrP = (EditText)findViewById(R.id.regtxtPassword);
         btnR = (Button)findViewById(R.id.btnRegister);
         btnTL = (Button)findViewById(R.id.btnToLogin);
+        rloading = (ProgressBar)findViewById(R.id.regLoading);
+        rloading.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -45,10 +49,13 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 String username = txtrU.getText().toString();
                 String password = txtrP.getText().toString();
+                rloading.setVisibility(View.VISIBLE);
+
                 if(username.matches("^\\s*$") | password.matches("^\\s*$")) {
                     Toast.makeText(Register.this,
                             "Username or Password is invalid!",
                             Toast.LENGTH_SHORT).show();
+                    rloading.setVisibility(View.GONE);
                 } else {
                     SignUp(username, password);
                 }
@@ -63,16 +70,16 @@ public class Register extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        // Log.d("Register", "createUserWithEmail:success");
                         Toast.makeText(Register.this, "Successfully registered!",
                                 Toast.LENGTH_SHORT).show();
+                        rloading.setVisibility(View.GONE);
                         finish();
                     } else {
                         // If sign in fails, display a message to the user.
-                        Log.w("Register", "createUserWithEmail:failure", task.getException());
                         Toast.makeText(Register.this,
                                 "Authentication failed. " + task.getException().toString().split(":")[1],
                                 Toast.LENGTH_LONG).show();
+                        rloading.setVisibility(View.GONE);
                     }
                 }
             });

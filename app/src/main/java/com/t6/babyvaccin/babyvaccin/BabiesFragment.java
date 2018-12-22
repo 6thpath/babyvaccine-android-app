@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class BabiesFragment extends Fragment {
     TextView txthUsr;
     Button btnLO, btnAC;
+    ProgressBar fbloading;
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseDatabase db;
@@ -43,6 +45,8 @@ public class BabiesFragment extends Fragment {
         btnLO = (Button) view.findViewById(R.id.btnLogout);
         btnAC = (Button) view.findViewById(R.id.btnAddChild);
         listbaby = (ListView) view.findViewById(R.id.listview);
+        fbloading = (ProgressBar) view.findViewById(R.id.fragBabiesLoading);
+        fbloading.setVisibility(View.GONE);
 
 //         Get user information
         mAuth = FirebaseAuth.getInstance();
@@ -51,8 +55,6 @@ public class BabiesFragment extends Fragment {
         String email = user.getEmail();
         String uid = user.getUid();
         txthUsr.setText(email);
-
-
 
         // Connect databse + create reference
         db = FirebaseDatabase.getInstance();
@@ -64,6 +66,7 @@ public class BabiesFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
                 babies.clear();
+                fbloading.setVisibility(View.VISIBLE);
                 for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
                     String uid = childDataSnapshot.child("uid").getValue().toString();
                     String name = childDataSnapshot.child("name").getValue().toString();
@@ -84,9 +87,11 @@ public class BabiesFragment extends Fragment {
                         mIntent.putExtra("uid", babies.get(i).getUid());
                         mIntent.putExtra("babyname", babies.get(i).getName());
                         mIntent.putExtra("dob", babies.get(i).getDob());
+                        fbloading.setVisibility(View.GONE);
                         startActivity(mIntent);
                     }
                 });
+                fbloading.setVisibility(View.GONE);
             }
 
             @Override
@@ -97,6 +102,7 @@ public class BabiesFragment extends Fragment {
 
         final Intent addchild = new Intent(getContext(), AddChild.class);
 
+        // Logout
         btnLO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +111,7 @@ public class BabiesFragment extends Fragment {
             }
         });
 
+        // add child
         btnAC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

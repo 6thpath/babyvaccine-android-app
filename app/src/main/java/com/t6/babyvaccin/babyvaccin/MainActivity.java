@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText txtU, txtP;
     Button btnL, btnTR;
+    ProgressBar lgLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         txtP = (EditText)findViewById(R.id.lgtxtPassword);
         btnL = (Button)findViewById(R.id.btnLogin);
         btnTR = (Button)findViewById(R.id.btnToRegister);
+        lgLoading = (ProgressBar)findViewById(R.id.loginLoading);
+        lgLoading.setVisibility(View.GONE);
 
         final Intent register = new Intent(this, Register.class);
         final Intent homeNav = new Intent(this, HomeNav.class);
@@ -49,11 +53,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = txtU.getText().toString();
                 String password = txtP.getText().toString();
+                lgLoading.setVisibility(View.VISIBLE);
 
                 if(username.matches("^\\s*$") | password.matches("^\\s*$")) {
                     Toast.makeText(MainActivity.this,
                             "Username or Password is invalid!",
                             Toast.LENGTH_SHORT).show();
+
+                    lgLoading.setVisibility(View.GONE);
                 } else {
                     SignIn(username, password);
                 }
@@ -79,12 +86,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,
                             "Authentication successfully!",
                             Toast.LENGTH_SHORT).show();
+                    lgLoading.setVisibility(View.GONE);
                     startActivity(homeNav);
                 } else {
                     // Log.w("Login", "signInWithEmail:failure", task.getException());
                     Toast.makeText(MainActivity.this,
                             "Authentication failed." + task.getException().toString().split(":")[1],
                             Toast.LENGTH_LONG).show();
+                    lgLoading.setVisibility(View.GONE);
                 }
                 }
             });

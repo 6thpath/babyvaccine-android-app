@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,6 +25,7 @@ import java.util.Locale;
 public class AddChild extends AppCompatActivity {
     EditText txtACN, txtACB;
     Button btnACA, btnACC;
+    ProgressBar acloading;
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseDatabase db;
@@ -38,6 +40,8 @@ public class AddChild extends AppCompatActivity {
         txtACB = (EditText)findViewById(R.id.txtACBirthday);
         btnACA = (Button)findViewById(R.id.btnAddChild);
         btnACC = (Button)findViewById(R.id.btnACCancel);
+        acloading = (ProgressBar)findViewById(R.id.addChildLoading);
+        acloading.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -81,16 +85,19 @@ public class AddChild extends AppCompatActivity {
             }
         });
 
+        // add Child
         btnACA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = txtACN.getText().toString();
                 String dob = txtACB.getText().toString();
+                acloading.setVisibility(View.VISIBLE);
 
                 if(name.matches("^\\s*$") || dob.matches("^\\s*$")) {
                     Toast.makeText(AddChild.this,
                             "Child's name or birthday is invalid!",
                             Toast.LENGTH_SHORT).show();
+                    acloading.setVisibility(View.GONE);
                 } else {
                     String newChildKey = myRef.push().getKey();
                     myRef.child("ChildList").child(newChildKey).setValue(new ChildClass(newChildKey, name, dob))
@@ -100,6 +107,7 @@ public class AddChild extends AppCompatActivity {
                                 Toast.makeText(AddChild.this,
                                         "Add child successfully!",
                                         Toast.LENGTH_SHORT).show();
+                                acloading.setVisibility(View.GONE);
                                 finish();
                             }
                         })
@@ -109,12 +117,14 @@ public class AddChild extends AppCompatActivity {
                                 Toast.makeText(AddChild.this,
                                         "Add child failed!",
                                         Toast.LENGTH_LONG).show();
+                                acloading.setVisibility(View.GONE);
                             }
                         });
                 }
             }
         });
 
+        // cancel
         btnACC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
