@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,8 @@ public class VaccinesFragment extends Fragment {
     ListView listvaccine;
     FirebaseDatabase db;
     DatabaseReference role, vaccineCollection;
+    ProgressBar fbloading;
+
 
     ArrayList<VaccinClass> vaccines = new ArrayList<VaccinClass>();
 
@@ -41,7 +44,8 @@ public class VaccinesFragment extends Fragment {
 
         btnAddVaccine = (Button) view.findViewById(R.id.btnStartAddVaccin);
         listvaccine = (ListView) view.findViewById(R.id.listvaccine);
-
+        fbloading = (ProgressBar) view.findViewById(R.id.fragVaccinesLoading);
+        fbloading.setVisibility(View.VISIBLE);
         // Connect databse + create reference
         db = FirebaseDatabase.getInstance();
 
@@ -62,6 +66,9 @@ public class VaccinesFragment extends Fragment {
                     }
                     if(isAdmin){
                         btnAddVaccine.setVisibility(View.VISIBLE);
+                        Toast.makeText(getContext(),
+                                "Logged as Administrator",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -81,6 +88,8 @@ public class VaccinesFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 vaccines.clear();
+                fbloading.setVisibility(View.VISIBLE);
+
                 for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
                     String uid = childDataSnapshot.child("uid").getValue().toString();
                     String name = childDataSnapshot.child("name").getValue().toString();
@@ -101,6 +110,8 @@ public class VaccinesFragment extends Fragment {
                         startActivity(mIntent);
                     }
                 });
+
+                fbloading.setVisibility(View.GONE);
             }
 
             @Override
