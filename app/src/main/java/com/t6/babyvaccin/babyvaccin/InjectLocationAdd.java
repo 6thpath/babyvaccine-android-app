@@ -39,6 +39,7 @@ public class InjectLocationAdd extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         IACollection = db.getReference("InjectAddress");
 
+        // Button Add
         btnAIA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +78,7 @@ public class InjectLocationAdd extends AppCompatActivity {
             }
         });
 
+        // Button cancel
         btnCIA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

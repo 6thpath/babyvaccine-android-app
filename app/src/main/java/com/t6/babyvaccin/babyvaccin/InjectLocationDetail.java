@@ -45,6 +45,7 @@ public class InjectLocationDetail extends AppCompatActivity {
             IASA.setText(mBundle.getString("address"));
         }
 
+        // Button Delete
         btnDIA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +66,7 @@ public class InjectLocationDetail extends AppCompatActivity {
             }
         });
 
+        // button cancel
         btnDIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

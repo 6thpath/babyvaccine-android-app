@@ -79,6 +79,7 @@ public class InjectLocationFragment extends Fragment {
             }
         });
 
+        // Button open Add form
         final Intent AIA = new Intent(getContext(), InjectLocationAdd.class);
         btnAddIA.setOnClickListener(new View.OnClickListener() {
             @Override
