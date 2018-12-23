@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +30,8 @@ public class VaccinesFragment extends Fragment {
     Button btnAddVaccine;
     ListView listvaccine;
     FirebaseDatabase db;
-    DatabaseReference vaccineCollection;
+    DatabaseReference role, vaccineCollection;
+
     ArrayList<VaccinClass> vaccines = new ArrayList<VaccinClass>();
 
     @Nullable
@@ -37,11 +42,39 @@ public class VaccinesFragment extends Fragment {
         btnAddVaccine = (Button) view.findViewById(R.id.btnStartAddVaccin);
         listvaccine = (ListView) view.findViewById(R.id.listvaccine);
 
-        final Intent addVaccine = new Intent(getContext(), VaccineAdd.class);
-
-
         // Connect databse + create reference
         db = FirebaseDatabase.getInstance();
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        role = db.getReference(uid).child("role");
+        role.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null){
+                    String role = dataSnapshot.getValue().toString();
+                    String[] roles = role.split(",");
+                    boolean isAdmin = false;
+                    for(int i = 0; i < roles.length ; i++ ){
+                        if(roles[i].equals("admin")){
+                            Log.w("VaccineFragment" ,"Admin logged");
+                            isAdmin = true;
+                        }
+                    }
+                    if(isAdmin){
+                        btnAddVaccine.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        final Intent addVaccine = new Intent(getContext(), VaccineAdd.class);
+
+        // Connect databse + create reference
         vaccineCollection = db.getReference("Vaccine");
 
         vaccineCollection.addValueEventListener(new ValueEventListener() {
