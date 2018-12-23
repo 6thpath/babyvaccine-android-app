@@ -75,19 +75,21 @@ public class BabiesFragment extends Fragment {
 //                    Log.d("UID", uid);
                     babies.add(new BabyClass(uid, name, dob));
                 }
-                BabyAdapter babyAdapter = new BabyAdapter(getContext(), babies);
-                listbaby.setAdapter(babyAdapter);
-                listbaby.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent mIntent = new Intent(getContext(), BabyDetail.class);
-                        mIntent.putExtra("uid", babies.get(i).getUid());
-                        mIntent.putExtra("babyname", babies.get(i).getName());
-                        mIntent.putExtra("dob", babies.get(i).getDob());
-                        fbloading.setVisibility(View.GONE);
-                        startActivity(mIntent);
-                    }
-                });
+                if(getActivity() != null){
+                    BabyAdapter babyAdapter = new BabyAdapter(getContext(), babies);
+                    listbaby.setAdapter(babyAdapter);
+                    listbaby.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent mIntent = new Intent(getContext(), BabyDetail.class);
+                            mIntent.putExtra("uid", babies.get(i).getUid());
+                            mIntent.putExtra("babyname", babies.get(i).getName());
+                            mIntent.putExtra("dob", babies.get(i).getDob());
+                            fbloading.setVisibility(View.GONE);
+                            startActivity(mIntent);
+                        }
+                    });
+                }
                 fbloading.setVisibility(View.GONE);
             }
 

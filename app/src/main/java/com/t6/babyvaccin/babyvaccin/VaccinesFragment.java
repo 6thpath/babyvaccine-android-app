@@ -98,18 +98,20 @@ public class VaccinesFragment extends Fragment {
                     vaccines.add(new VaccinClass(uid, name, description));
 
                 }
-                VaccineAdapter vaccineAdapter = new VaccineAdapter(getContext(), vaccines);
-                listvaccine.setAdapter(vaccineAdapter);
-                listvaccine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent mIntent = new Intent(getContext(), VaccineDetail.class);
-                        mIntent.putExtra("uid", vaccines.get(i).getUid());
-                        mIntent.putExtra("name", vaccines.get(i).getName());
-                        mIntent.putExtra("description", vaccines.get(i).getDescription());
-                        startActivity(mIntent);
-                    }
-                });
+                if (getActivity() != null){
+                    VaccineAdapter vaccineAdapter = new VaccineAdapter(getContext(), vaccines);
+                    listvaccine.setAdapter(vaccineAdapter);
+                    listvaccine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent mIntent = new Intent(getContext(), VaccineDetail.class);
+                            mIntent.putExtra("uid", vaccines.get(i).getUid());
+                            mIntent.putExtra("name", vaccines.get(i).getName());
+                            mIntent.putExtra("description", vaccines.get(i).getDescription());
+                            startActivity(mIntent);
+                        }
+                    });
+                }
 
                 fbloading.setVisibility(View.GONE);
             }

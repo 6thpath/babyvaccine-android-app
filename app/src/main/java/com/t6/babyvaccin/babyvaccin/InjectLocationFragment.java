@@ -87,19 +87,21 @@ public class InjectLocationFragment extends Fragment {
                     ias.add(new IAClass(uid, name, address));
 
                 }
-                InjectLocationAdapter IAAdapter = new InjectLocationAdapter(getContext(), ias);
-                listIAs.setAdapter(IAAdapter);
-                listIAs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent mIntent = new Intent(getContext(), InjectLocationDetail.class);
-                        mIntent.putExtra("uid", ias.get(i).getUid());
-                        mIntent.putExtra("name", ias.get(i).getName());
-                        mIntent.putExtra("address", ias.get(i).getAddress());
-                        startActivity(mIntent);
-                        IALL.setVisibility(View.GONE);
-                    }
-                });
+                if(getActivity() != null){
+                    InjectLocationAdapter IAAdapter = new InjectLocationAdapter(getContext(), ias);
+                    listIAs.setAdapter(IAAdapter);
+                    listIAs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent mIntent = new Intent(getContext(), InjectLocationDetail.class);
+                            mIntent.putExtra("uid", ias.get(i).getUid());
+                            mIntent.putExtra("name", ias.get(i).getName());
+                            mIntent.putExtra("address", ias.get(i).getAddress());
+                            startActivity(mIntent);
+                            IALL.setVisibility(View.GONE);
+                        }
+                    });
+                }
                 IALL.setVisibility(View.GONE);
             }
 
