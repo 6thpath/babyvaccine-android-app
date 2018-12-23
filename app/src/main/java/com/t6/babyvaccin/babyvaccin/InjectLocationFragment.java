@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +31,7 @@ public class InjectLocationFragment extends Fragment {
     ProgressBar IALL;
 
     FirebaseDatabase db;
-    DatabaseReference IA;
+    DatabaseReference IA, role;
     ArrayList<IAClass> ias = new ArrayList<>();
 
     @Nullable
@@ -44,6 +47,33 @@ public class InjectLocationFragment extends Fragment {
         // Connect database + create reference
         db = FirebaseDatabase.getInstance();
         IA = db.getReference("InjectAddress");
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        role = db.getReference(uid).child("role");
+        role.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null){
+                    String role = dataSnapshot.getValue().toString();
+                    String[] roles = role.split(",");
+                    boolean isAdmin = false;
+                    for(int i = 0; i < roles.length ; i++ ){
+                        if(roles[i].equals("admin")){
+                            Log.w("VaccineFragment" ,"Admin logged");
+                            isAdmin = true;
+                        }
+                    }
+                    if(isAdmin){
+                        btnAddIA.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         IA.addValueEventListener(new ValueEventListener() {
             @Override

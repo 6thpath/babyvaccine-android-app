@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginTop="10dp"
+        android:textAppearance="@android:style/TextAppearance.Material.SearchResult.Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/IADName" />
 
@@ -41,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginTop="10dp"
+        android:textAppearance="@android:style/TextAppearance.Material.SearchResult.Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/IADAddress" />
 
@@ -54,7 +56,9 @@
         android:text="Delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IADShowAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/IADShowAddress"
+        android:visibility="invisible"
+    />
 
     <Button
         android:id="@+id/btnIABack"

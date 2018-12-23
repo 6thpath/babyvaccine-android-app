@@ -3,6 +3,7 @@ package com.t6.babyvaccin.babyvaccin;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -11,8 +12,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class InjectLocationDetail extends AppCompatActivity {
     TextView IASN, IASA;
@@ -21,7 +26,7 @@ public class InjectLocationDetail extends AppCompatActivity {
     String IAuid;
 
     FirebaseDatabase db;
-    DatabaseReference myRef;
+    DatabaseReference myRef, role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,33 @@ public class InjectLocationDetail extends AppCompatActivity {
 
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference("InjectAddress");
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        role = db.getReference(uid).child("role");
+        role.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null){
+                    String role = dataSnapshot.getValue().toString();
+                    String[] roles = role.split(",");
+                    boolean isAdmin = false;
+                    for(int i = 0; i < roles.length ; i++ ){
+                        if(roles[i].equals("admin")){
+                            Log.w("VaccineFragment" ,"Admin logged");
+                            isAdmin = true;
+                        }
+                    }
+                    if(isAdmin){
+                        btnDIA.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         Bundle mBundle = getIntent().getExtras();
         if (mBundle != null) {
