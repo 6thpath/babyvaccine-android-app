@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,9 @@ public class BabyDetail extends AppCompatActivity {
 
     String uidBaby;
     TextView txtBabyname, txtDob;
-    Button btnDelete;
+    Button btnDelete, btnBDB;
+    ProgressBar BDL;
+
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseDatabase db;
@@ -35,6 +38,9 @@ public class BabyDetail extends AppCompatActivity {
         txtBabyname = (TextView) findViewById(R.id.txtBabyname);
         txtDob = (TextView) findViewById(R.id.txtDob);
         btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnBDB = (Button) findViewById(R.id.btnBDBack);
+        BDL = (ProgressBar) findViewById(R.id.BDLoading);
+        BDL.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -52,20 +58,30 @@ public class BabyDetail extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            BDL.setVisibility(View.VISIBLE);
             if(uidBaby != null){
                 myRef.child(uidBaby).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(BabyDetail.this, "Delete baby successfully", Toast.LENGTH_SHORT).show();
+                            BDL.setVisibility(View.GONE);
                             finish();
                         } else {
                             Toast.makeText(BabyDetail.this, "Remove failed", Toast.LENGTH_SHORT).show();
+                            BDL.setVisibility(View.GONE);
                         }
                     }
                 });
 
             }
+            }
+        });
+
+        btnBDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

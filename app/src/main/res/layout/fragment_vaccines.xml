@@ -7,23 +7,36 @@
 
     <Button
         android:id="@+id/btnStartAddVaccin"
-        android:layout_width="354dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
         android:text="Add Vaccin"
-        android:visibility="invisible"
-        />
+        android:visibility="invisible" />
 
     <ListView
         android:id="@+id/listvaccine"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="389dp"
+        android:layout_below="@+id/divider4"
         android:layout_alignStart="@+id/btnStartAddVaccin"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="122dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="17dp" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/btnStartAddVaccin"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="25dp"
+        android:background="?android:attr/listDivider" />
 </RelativeLayout>
