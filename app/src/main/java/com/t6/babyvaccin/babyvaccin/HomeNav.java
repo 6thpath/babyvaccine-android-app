@@ -32,6 +32,9 @@ public class HomeNav extends AppCompatActivity {
                     case R.id.nav_vaccin:
                         selectedFragment = new VaccinesFragment();
                         break;
+                    case R.id.nav_address:
+                        selectedFragment = new InjectLocationFragment();
+                        break;
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();

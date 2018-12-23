@@ -20,12 +20,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".BabiesFragment" />
         <activity android:name=".BabyAdd" />
         <activity android:name=".BabyDetail" />
         <activity android:name=".HomeNav" />
         <activity android:name=".VaccineAdd" />
-        <activity android:name=".VaccineDetail"></activity>
+        <activity android:name=".VaccineDetail" />
+        <activity android:name=".InjectLocationAdd" />
+        <activity android:name=".InjectLocationDetail" />
     </application>
 
 </manifest>
