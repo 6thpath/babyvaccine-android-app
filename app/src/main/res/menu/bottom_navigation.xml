@@ -16,7 +16,12 @@
     <item
         android:id="@+id/nav_address"
         android:icon="@drawable/ic_location_on_black_24dp"
-        android:title="Inject location" />
+        android:title="Locations" />
 
-
+    <item
+        android:id="@+id/nav_admin"
+        android:icon="@drawable/ic_people_black_24dp"
+        android:title="Admin"
+        android:visible="false"
+    />
 </menu>

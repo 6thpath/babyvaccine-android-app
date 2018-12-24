@@ -96,8 +96,8 @@ public class BabyDetail extends AppCompatActivity {
                             int month = c.get(Calendar.MONTH)+1;
                             int day = c.get(Calendar.DAY_OF_MONTH);
                             // create schdule string
-                            txtSchedule.append(name + ": " + "\t\t\t" + day+"/"+month+"/"+year + "\r\n");
-                        } catch (ParseException pe) {
+                            txtSchedule.append(name + ": " + "\t\t\t" + month+"/"+day+"/"+year + "\r\n");
+                        } catch (Exception pe) {
                             pe.printStackTrace();
                         }
                     }

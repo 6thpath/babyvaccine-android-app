@@ -44,9 +44,9 @@ public class VaccineAdd extends AppCompatActivity {
                 String injectAt = txtInjectAt.getText().toString();
 //                acloading.setVisibility(View.VISIBLE);
 
-                if(name.matches("^\\s*$") || description.matches("^\\s*$")) {
+                if(name.matches("^\\s*$") || description.matches("^\\s*$") || injectAt.matches("^\\s*$")) {
                     Toast.makeText(VaccineAdd.this,
-                            "Vaccine's name or description is invalid!",
+                            "Vaccine's name or description or time is invalid!",
                             Toast.LENGTH_SHORT).show();
 //                    acloading.setVisibility(View.GONE);
                 } else {
