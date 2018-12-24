@@ -17,7 +17,7 @@ import com.t6.babyvaccin.babyvaccin.model.VaccinClass;
 public class VaccineAdd extends AppCompatActivity {
 
     Button btnAddVaccine, btnCancel;
-    EditText txtName, txtDescription;
+    EditText txtName, txtDescription, txtInjectAt;
     FirebaseDatabase db;
     DatabaseReference vaccineCollection;
 
@@ -31,6 +31,7 @@ public class VaccineAdd extends AppCompatActivity {
         btnCancel = (Button) findViewById(R.id.btnCancelAddVaccin);
         txtName = (EditText) findViewById(R.id.inputVaccineName);
         txtDescription = (EditText) findViewById(R.id.inputDescription);
+        txtInjectAt = (EditText) findViewById(R.id.AVInjectAt);
 
         db = FirebaseDatabase.getInstance();
         vaccineCollection = db.getReference("Vaccine");
@@ -40,6 +41,7 @@ public class VaccineAdd extends AppCompatActivity {
             public void onClick(View v) {
                 String name = txtName.getText().toString();
                 String description = txtDescription.getText().toString();
+                String injectAt = txtInjectAt.getText().toString();
 //                acloading.setVisibility(View.VISIBLE);
 
                 if(name.matches("^\\s*$") || description.matches("^\\s*$")) {
@@ -49,7 +51,7 @@ public class VaccineAdd extends AppCompatActivity {
 //                    acloading.setVisibility(View.GONE);
                 } else {
                     String newChildKey = vaccineCollection.push().getKey();
-                    vaccineCollection.child(newChildKey).setValue(new VaccinClass(newChildKey, name, description))
+                    vaccineCollection.child(newChildKey).setValue(new VaccinClass(newChildKey, name, description, injectAt))
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

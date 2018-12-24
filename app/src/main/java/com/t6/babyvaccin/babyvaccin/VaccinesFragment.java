@@ -66,9 +66,9 @@ public class VaccinesFragment extends Fragment {
                     }
                     if(isAdmin){
                         btnAddVaccine.setVisibility(View.VISIBLE);
-                        Toast.makeText(getContext(),
-                                "Logged as Administrator",
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(),
+//                                "Logged as Administrator",
+//                                Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -94,8 +94,9 @@ public class VaccinesFragment extends Fragment {
                     String uid = childDataSnapshot.child("uid").getValue().toString();
                     String name = childDataSnapshot.child("name").getValue().toString();
                     String description = childDataSnapshot.child("description").getValue().toString();
+                    String injectAt = childDataSnapshot.child("injectAt").getValue().toString();
 //                    Log.d("UID", uid);
-                    vaccines.add(new VaccinClass(uid, name, description));
+                    vaccines.add(new VaccinClass(uid, name, description, injectAt));
 
                 }
                 if (getActivity() != null){
@@ -108,6 +109,7 @@ public class VaccinesFragment extends Fragment {
                             mIntent.putExtra("uid", vaccines.get(i).getUid());
                             mIntent.putExtra("name", vaccines.get(i).getName());
                             mIntent.putExtra("description", vaccines.get(i).getDescription());
+                            mIntent.putExtra("injectAt", vaccines.get(i).getInjectAt());
                             startActivity(mIntent);
                         }
                     });

@@ -20,7 +20,7 @@
     <TextView
         android:id="@+id/txtVaccineDescription"
         android:layout_width="350dp"
-        android:layout_height="200dp"
+        android:layout_height="135dp"
         android:layout_marginStart="17dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="17dp"
@@ -58,11 +58,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="17dp"
         android:text="Delete"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtVaccineDescription"
-        android:visibility="invisible"
-    />
+        app:layout_constraintTop_toBottomOf="@+id/VDInjectAtS" />
 
     <Button
         android:id="@+id/btnVBack"
@@ -90,5 +89,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/VDInjectAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="20dp"
+        android:text="Inject At"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtVaccineDescription" />
+
+    <TextView
+        android:id="@+id/VDInjectAtS"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VDInjectAt" />
 
 </android.support.constraint.ConstraintLayout>

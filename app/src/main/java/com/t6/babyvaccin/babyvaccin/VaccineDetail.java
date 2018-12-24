@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class VaccineDetail extends AppCompatActivity {
 
-    TextView txtName, txtDescription;
+    TextView txtName, txtDescription, txtInjectAtS;
     Button btnVD, btnVB;
     String uidVaccine;
     ProgressBar VDL;
@@ -37,6 +37,7 @@ public class VaccineDetail extends AppCompatActivity {
 
         txtName = (TextView) findViewById(R.id.txtVaccineName);
         txtDescription = (TextView) findViewById(R.id.txtVaccineDescription);
+        txtInjectAtS = (TextView) findViewById(R.id.VDInjectAtS);
         btnVD = (Button) findViewById(R.id.btnVDelete);
         btnVB = (Button) findViewById(R.id.btnVBack);
         VDL = (ProgressBar) findViewById(R.id.VDLoading);
@@ -78,6 +79,7 @@ public class VaccineDetail extends AppCompatActivity {
             txtName.setText(mBundle.getString("name"));
             txtDescription.setText(mBundle.getString("description"));
             txtDescription.setMovementMethod(new ScrollingMovementMethod());
+            txtInjectAtS.setText(mBundle.getString("injectAt"));
         }
 
         btnVD.setOnClickListener(new View.OnClickListener() {
